@@ -5,6 +5,7 @@ public record EmployeeDTO(
          String username,
         String name,
         String surname,
-        String email
+        String email,
+         String password
 ) {
 }

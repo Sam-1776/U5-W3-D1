@@ -22,15 +22,17 @@ public class Employee {
     private String name;
     private String surname;
     private String email;
+    private String password;
     private String profilePic;
     @OneToMany(mappedBy = "employee")
     private List<Device> devices;
 
-    public Employee(String username, String name, String surname, String email, String profilePic) {
+    public Employee(String username, String name, String surname, String email, String password, String profilePic) {
         this.username = username;
         this.name = name;
         this.surname = surname;
         this.email = email;
+        this.password = password;
         this.profilePic = profilePic;
     }
 }

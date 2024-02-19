@@ -34,14 +34,6 @@ public class EmployeeController {
         return this.employeeService.findById(id);
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Employee save(@RequestBody @Validated EmployeeDTO employee, BindingResult validation){
-        if (validation.hasErrors()){
-            throw new BadRequestException(validation.getAllErrors());
-        }
-        return this.employeeService.save(employee);
-    }
 
     @PutMapping("/{id}")
     public Employee update(@PathVariable UUID id, @RequestBody EmployeeDTO employeeUp){

@@ -43,7 +43,7 @@ public class EmployeeService {
             throw new BadRequestException("Email inserita già in uso riprovare");
         });
         String avatar = "https://ui-avatars.com/api/?name=" + employee.name() + "+" + employee.surname();
-        Employee newEmployee = new Employee(employee.username(), employee.name(), employee.surname(), employee.email(), avatar);
+        Employee newEmployee = new Employee(employee.username(), employee.name(), employee.surname(), employee.email(), employee.password(), avatar);
         return employeeDAO.save(newEmployee);
     }
 
@@ -90,5 +90,9 @@ public class EmployeeService {
         employee.setProfilePic(employee.getProfilePic());
         deviceDAO.save(device);
         return employeeDAO.save(employee);
+    }
+
+    public Employee findByEmail(String email){
+        return employeeDAO.findByEmail(email).orElseThrow(() -> new NotFoundException("Utente con email: " + email + " non trovato"));
     }
 }

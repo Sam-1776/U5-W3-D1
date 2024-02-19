@@ -1,5 +1,6 @@
 package samuelesimeone.esercizioU5w3d1.exceptions;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestControllerAdvice
+@Slf4j
 public class Handler {
 
     @ExceptionHandler(BadRequestException.class)
@@ -18,8 +20,16 @@ public class Handler {
         if (!bd.getErrorList().isEmpty()){
             List<String> errorList = bd.getErrorList().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
             return new ErrorsPayloadList(bd.getMessage(), LocalDateTime.now(), errorList);
-        }
+        }else {
         return new ErrorsPayload(bd.getMessage(), LocalDateTime.now());
+        }
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    // Con questa annotazione indico che questo metodo gestirà le eccezioni di tipo UnauthorizedException
+    @ResponseStatus(HttpStatus.UNAUTHORIZED) // 401
+    public ErrorsPayload handleUnauthorized(UnauthorizedException ex) {
+        return new ErrorsPayload(ex.getMessage(), LocalDateTime.now());
     }
 
     @ExceptionHandler(NotFoundException.class)
