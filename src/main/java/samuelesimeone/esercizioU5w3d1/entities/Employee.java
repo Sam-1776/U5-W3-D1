@@ -11,7 +11,6 @@ import java.util.UUID;
 @Table(name = "employees")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 public class Employee {
     @Id
@@ -34,5 +33,18 @@ public class Employee {
         this.email = email;
         this.password = password;
         this.profilePic = profilePic;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", profilePic='" + profilePic + '\'' +
+                '}';
     }
 }
